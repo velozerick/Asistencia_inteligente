@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reconocimiento Facial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #648ceb, #8f44ad);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-size: 16px;
+        }
+
+        input[type="text"] {
+            width: 200px;
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #f3841d;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 4px;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="message">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <h1>Capturar rostro</h1>
+  
+    <form action="/capturar" method="POST">
+        <label for="nombre_imagen">Nombre Completo:</label>
+        <input type="text" id="nombre_imagen" name="nombre_imagen"><br>
+        <label for="numero_cuenta">Número de cuenta:</label>
+        <input type="text" id="numero_cuenta" name="numero_cuenta"><br>
+        <button type="submit">Capturar</button>
+    </form>
+
+
+    <h1>Extracción Facial</h1>
+    <form action="/detect_faces" method="POST">
+        <button type="submit">Detectar Rostros</button>
+    </form>
+
+    <h1>Reconocimiento Facial</h1>
+    <form action="/recognize_faces" method="POST">
+        <input type="text" id="numero_cuenta" name="numero_cuenta"><br>
+       
+        <button type="submit">Iniciar reconocimiento facial</button><br>
+    </form>
+
+</div>
+
+</body>
+</html>
